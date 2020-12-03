@@ -3,7 +3,8 @@
     <nav class="main-nav">
       <ExperimentList :files="files"/>
     </nav>
-    <ExperimentOverview class="content" :experiments="experiments"/>
+    <ExperimentOverview v-if="view==='overview'" class="content" :experiments="experiments"/>
+    <ExperimentDetail v-if="view==='detail'"/>
   </div>
 </template>
 
@@ -12,10 +13,12 @@ import ExperimentList from '@/components/ExperimentList.vue';
 import ExperimentOverview from '@/components/ExperimentOverview.vue';
 import firestore from '@/db';
 import Experiment from '@/experiment';
+import ExperimentDetail from '@/components/ExperimentDetail.vue';
 
 export default {
   name: 'Home',
   components: {
+    ExperimentDetail,
     ExperimentList,
     ExperimentOverview,
   },
@@ -24,6 +27,7 @@ export default {
       files: [],
       currentFile: '',
       experiments: [],
+      view: 'overview',
     };
   },
   async mounted() {
