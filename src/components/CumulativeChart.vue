@@ -14,7 +14,7 @@ import { GChart } from 'vue-google-charts';
 import Experiment from '@/experiment';
 
 export default {
-  name: 'LineChart',
+  name: 'CumulativeChart',
   components: {
     GChart,
   },
@@ -33,27 +33,40 @@ export default {
         legend: {
           position: 'bottom',
         },
-        chartArea: {
-          // left: 10,
-          // right: 10,
-          // top: 10,
-          // bottom: 10,
-        },
-        vAxis: {
-          // minValue: -1,
-          // maxValue: 1,
-        },
         title: `${this.experiment.file} ${this.experiment.bandwidth / 1000} kbps, cc: ${this.experiment.congestionControl} ${this.experiment.congestionControl !== 'none' ? this.experiment.feedbackFrequency : ''} ${this.experiment.congestionControl !== 'none' ? 'ms' : ''}`,
       };
     },
   },
   methods: {
+    updateData(data) {
+      function arrayShareBelowPivot(a, pivot) {
+        return a.filter((x) => (x <= pivot)).length / a.length;
+      }
+
+      const dataArr = data.rows;
+      const d = [];
+
+      dataArr.forEach((x) => d.push(1 * x.c[1].v));
+      d.sort((a, b) => a - b);
+
+      const min = d[0];
+      const max = d[d.length - 1];
+      const resolution = d.length;
+
+      const stepSize = (max - min) / resolution;
+
+      const res = [];
+
+      for (let i = 0; i <= resolution; i += 1) {
+        res.push([min + i * stepSize, arrayShareBelowPivot(d, min + i * stepSize)]);
+      }
+
+      this.chartData = [['x', 'y']].concat(res);
+    },
     onChartReady() {
       fetch(this.experiment.data[`${this.metric}`])
         .then((response) => response.json())
-        .then((data) => {
-          this.chartData = data;
-        }, (error) => {
+        .then(this.updateData, (error) => {
           console.log(error);
         });
     },
@@ -63,9 +76,7 @@ export default {
       this.metric = newVal;
       fetch(this.experiment.data[`${this.metric}`])
         .then((response) => response.json())
-        .then((data) => {
-          this.chartData = data;
-        }, (error) => {
+        .then(this.updateData, (error) => {
           console.log(error);
         });
     },
