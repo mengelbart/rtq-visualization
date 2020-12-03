@@ -33,6 +33,16 @@ export default {
         legend: {
           position: 'bottom',
         },
+        chartArea: {
+          // left: 10,
+          // right: 10,
+          // top: 10,
+          // bottom: 10,
+        },
+        vAxis: {
+          // minValue: -1,
+          // maxValue: 1,
+        },
         title: `${this.experiment.file} ${this.experiment.bandwidth / 1000} kbps, cc: ${this.experiment.congestionControl} ${this.experiment.congestionControl !== 'none' ? this.experiment.feedbackFrequency : ''} ${this.experiment.congestionControl !== 'none' ? 'ms' : ''}`,
       };
     },

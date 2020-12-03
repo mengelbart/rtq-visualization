@@ -66,16 +66,23 @@ export default {
         || a.bandwidth - b.bandwidth
         || a.feedbackFrequency - b.feedbackFrequency;
     },
+    metricFilter(exp, metric) {
+      console.log(exp.data);
+      return exp.data[metric];
+    },
   },
   computed: {
     udp() {
-      return this.experiments.filter((e) => e.handler === 'udp').sort(this.expSort);
+      return this.experiments.filter((e) => e.handler === 'udp'
+        && this.metricFilter(e, this.selectedMetric.text)).sort(this.expSort);
     },
     datagram() {
-      return this.experiments.filter((e) => e.handler === 'datagram').sort(this.expSort);
+      return this.experiments.filter((e) => e.handler === 'datagram'
+        && this.metricFilter(e, this.selectedMetric.text)).sort(this.expSort);
     },
     streamPerFrame() {
-      return this.experiments.filter((e) => e.handler === 'streamperframe').sort(this.expSort);
+      return this.experiments.filter((e) => e.handler === 'streamperframe'
+        && this.metricFilter(e, this.selectedMetric.text)).sort(this.expSort);
     },
   },
 };
