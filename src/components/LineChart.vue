@@ -33,13 +33,13 @@ export default {
         legend: {
           position: 'bottom',
         },
-        title: `${this.experiment.file}-${this.experiment.bandwidth}-${this.experiment.congestionControl}-${this.experiment.feedbackFrequency}`,
+        title: `${this.experiment.file} ${this.experiment.bandwidth / 1000} kbps, cc: ${this.experiment.congestionControl} ${this.experiment.congestionControl !== 'none' ? this.experiment.feedbackFrequency : ''} ${this.experiment.congestionControl !== 'none' ? 'ms' : ''}`,
       };
     },
   },
   methods: {
     onChartReady() {
-      fetch(this.experiment.data[`${this.metric}.log`])
+      fetch(this.experiment.data[`${this.metric}`])
         .then((response) => response.json())
         .then((data) => {
           this.chartData = data;
@@ -51,7 +51,7 @@ export default {
   watch: {
     metric(newVal) {
       this.metric = newVal;
-      fetch(this.experiment.data[`${this.metric}.log`])
+      fetch(this.experiment.data[`${this.metric}`])
         .then((response) => response.json())
         .then((data) => {
           this.chartData = data;

@@ -35,6 +35,10 @@ export default {
           return new Experiment({
             Handler: d.Handler,
             File: d.File,
+            Bandwidth: d.Bandwidth,
+            CongestionControl: d.CongestionControl,
+            FeedbackFrequency: d.FeedbackFrequency,
+            Version: d.Version,
             Data: d.Data,
           });
         });

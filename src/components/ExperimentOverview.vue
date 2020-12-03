@@ -48,24 +48,34 @@ export default {
   data() {
     return {
       metrics: [
-        { text: 'ssim', component: 'LineChart' },
-        { text: 'psnr', component: 'LineChart' },
+        { text: 'SSIM', component: 'LineChart' },
+        { text: 'PSNR', component: 'LineChart' },
+        { text: 'scream-bitrate', component: 'LineChart' },
+        { text: 'scream-congestion', component: 'LineChart' },
+        { text: 'scream-queue-length', component: 'LineChart' },
       ],
       selectedMetric: {
-        text: 'ssim',
+        text: 'SSIM',
         component: 'LineChart',
       },
     };
   },
+  methods: {
+    expSort(a, b) {
+      return a.congestionControl - b.congestionControl
+        || a.bandwidth - b.bandwidth
+        || a.feedbackFrequency - b.feedbackFrequency;
+    },
+  },
   computed: {
     udp() {
-      return this.experiments.filter((e) => e.handler === 'udp');
+      return this.experiments.filter((e) => e.handler === 'udp').sort(this.expSort);
     },
     datagram() {
-      return this.experiments.filter((e) => e.handler === 'datagram');
+      return this.experiments.filter((e) => e.handler === 'datagram').sort(this.expSort);
     },
     streamPerFrame() {
-      return this.experiments.filter((e) => e.handler === 'streamperframe');
+      return this.experiments.filter((e) => e.handler === 'streamperframe').sort(this.expSort);
     },
   },
 };

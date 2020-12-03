@@ -9,16 +9,19 @@ class Experiment {
 
   feedbackFrequency = 0;
 
+  version = '';
+
   data = {};
 
   constructor({
-    Handler, File, Bandwidth, Data, CongestionControl, FeedbackFrequency,
+    Handler, File, Bandwidth, Data, CongestionControl, FeedbackFrequency, Version,
   }) {
     this.handler = Handler;
     this.file = File;
     this.bandwidth = Bandwidth;
     this.congestionControl = CongestionControl;
     this.feedbackFrequency = FeedbackFrequency;
+    this.version = Version;
     this.data = Data;
   }
 }
