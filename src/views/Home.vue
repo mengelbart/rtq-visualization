@@ -10,7 +10,7 @@
 <script>
 import ExperimentList from '@/components/ExperimentList.vue';
 import ExperimentOverview from '@/components/ExperimentOverview.vue';
-import db from '@/db';
+import firestore from '@/db';
 import Experiment from '@/experiment';
 
 export default {
@@ -26,24 +26,27 @@ export default {
       experiments: [],
     };
   },
-  mounted() {
-    db.collection('experiments')
-      .get()
-      .then((querySnapshot) => {
-        this.experiments = querySnapshot.docs.map((doc) => {
-          const d = doc.data();
-          return new Experiment({
-            Handler: d.Handler,
-            File: d.File,
-            Bandwidth: d.Bandwidth,
-            CongestionControl: d.CongestionControl,
-            FeedbackFrequency: d.FeedbackFrequency,
-            Version: d.Version,
-            Data: d.Data,
+  async mounted() {
+    firestore.then((db) => {
+      db.collection('experiments')
+        .get()
+        .then((querySnapshot) => {
+          this.experiments = querySnapshot.docs.map((doc) => {
+            const d = doc.data();
+            return new Experiment({
+              Handler: d.Handler,
+              File: d.File,
+              Bandwidth: d.Bandwidth,
+              CongestionControl: d.CongestionControl,
+              FeedbackFrequency: d.FeedbackFrequency,
+              Version: d.Version,
+              Data: d.Data,
+            });
           });
+          this.files = this.experiments.map((e) => e.file)
+            .filter((v, i, a) => a.indexOf(v) === i);
         });
-        this.files = this.experiments.map((e) => e.file).filter((v, i, a) => a.indexOf(v) === i);
-      });
+    });
   },
 };
 </script>
