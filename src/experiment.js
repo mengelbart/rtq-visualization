@@ -44,7 +44,35 @@ class Experiment {
   }
 
   title() {
-    return `${this.file}, ${this.bandwidth / 1000000}Mb/s, ${this.congestionControl}, ${this.feedbackFrequency / 1000000}ms, ${this.requestKeyframes ? 'keyframe requests' : ''}, ${this.iperf ? 'iperf' : ''}`;
+    return `${this.file}, ${this.bandwidthString()}, ${this.congestionControlString()}, ${this.iperf ? 'second stream: iperf' : 'no second stream'}`;
+  }
+
+  bandwidthString() {
+    if (this.bandwidth <= 0) {
+      return 'no bw limit';
+    }
+    return `${this.bandwidth / 1000000}Mb/s`;
+  }
+
+  congestionControlString() {
+    if (this.congestionControl === 'none') {
+      return 'no cc';
+    }
+    return `${this.congestionControl}: ${this.feedbackFrequencyString()}, ${this.keyframeRequestString()}`;
+  }
+
+  feedbackFrequencyString() {
+    if (this.congestionControl === 'none') {
+      return '';
+    }
+    return `${this.feedbackFrequency / 1000000}ms`;
+  }
+
+  keyframeRequestString() {
+    if (this.congestionControl === 'none') {
+      return '';
+    }
+    return `${this.requestKeyframes ? 'keyframe requests' : 'no keyframe requests'}`;
   }
 }
 

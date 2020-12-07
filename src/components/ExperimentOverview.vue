@@ -66,9 +66,12 @@ export default {
   },
   methods: {
     expSort(a, b) {
-      return a.congestionControl - b.congestionControl
+      return a.file.localeCompare(b.file)
+        || a.congestionControl.localeCompare(b.congestionControl)
         || a.bandwidth - b.bandwidth
-        || a.feedbackFrequency - b.feedbackFrequency;
+        || a.feedbackFrequency - b.feedbackFrequency
+        || a.requestKeyframes - b.requestKeyframes
+        || a.iperf - b.iperf;
     },
     metricFilter(exp, metric) {
       return exp.data[metric];
