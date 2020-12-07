@@ -28,7 +28,6 @@ export default {
       chartData: {},
       chartEvents: {
         click: () => {
-          console.log(this.experiment.id);
           this.$emit('click', this.experiment.id);
         },
       },

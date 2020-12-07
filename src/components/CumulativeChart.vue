@@ -5,6 +5,7 @@
       :data="chartData"
       :options="chartOptions"
       @ready="onChartReady"
+      :events="chartEvents"
     />
   </div>
 </template>
@@ -25,6 +26,11 @@ export default {
   data() {
     return {
       chartData: {},
+      chartEvents: {
+        click: () => {
+          this.$emit('click', this.experiment.id);
+        },
+      },
     };
   },
   computed: {
