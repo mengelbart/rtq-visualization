@@ -11,18 +11,40 @@ class Experiment {
 
   version = '';
 
+  requestKeyframes = false;
+
   data = {};
 
   constructor({
-    Handler, File, Bandwidth, Data, CongestionControl, FeedbackFrequency, Version,
+    handler,
+    filename,
+    bandwidth,
+    // eslint-disable-next-line camelcase
+    congestion_control,
+    // eslint-disable-next-line camelcase
+    feedback_frequency,
+    version,
+    // eslint-disable-next-line camelcase
+    request_key_frames,
+    iperf,
+    data,
   }) {
-    this.handler = Handler;
-    this.file = File;
-    this.bandwidth = Bandwidth;
-    this.congestionControl = CongestionControl;
-    this.feedbackFrequency = FeedbackFrequency;
-    this.version = Version;
-    this.data = Data;
+    this.handler = handler;
+    this.file = filename;
+    this.bandwidth = bandwidth;
+    // eslint-disable-next-line camelcase
+    this.congestionControl = congestion_control;
+    // eslint-disable-next-line camelcase
+    this.feedbackFrequency = feedback_frequency;
+    this.version = version;
+    // eslint-disable-next-line camelcase
+    this.requestKeyframes = request_key_frames;
+    this.iperf = iperf;
+    this.data = data;
+  }
+
+  title() {
+    return `${this.file}, ${this.bandwidth / 1000000}Mb/s, ${this.congestionControl}, ${this.feedbackFrequency / 1000000}ms, ${this.requestKeyframes ? 'keyframe requests' : ''}, ${this.iperf ? 'iperf' : ''}`;
   }
 }
 
