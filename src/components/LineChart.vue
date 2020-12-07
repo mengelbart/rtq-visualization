@@ -33,18 +33,31 @@ export default {
         legend: {
           position: 'bottom',
         },
-        chartArea: {
-          // left: 10,
-          // right: 10,
-          // top: 10,
-          // bottom: 10,
-        },
-        vAxis: {
-          // minValue: -1,
-          // maxValue: 1,
-        },
+        vAxis: this.vAxis,
         title: this.experiment.title(),
+        chartArea: {
+          width: '80%',
+        },
       };
+    },
+    vAxis() {
+      switch (this.metric) {
+        case 'SSIM':
+          return {
+            minValue: 0,
+            maxValue: 1,
+          };
+        case 'PSNR':
+          return {
+            minValue: 0.6,
+            maxValue: 1,
+          };
+        default:
+          return {
+            minValue: 0,
+            maxValue: 1,
+          };
+      }
     },
   },
   methods: {
