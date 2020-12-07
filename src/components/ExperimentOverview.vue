@@ -13,7 +13,9 @@
         v-for="(u, index) in udp"
         :key="index"
         :experiment="u"
-        :metric="selectedMetric.metric"/>
+        :metric="selectedMetric.metric"
+        v-on="$listeners"
+      />
     </div>
     <div class="two">
       <h3>datagram</h3>
@@ -22,7 +24,9 @@
         v-for="(d, index) in datagram"
         :key="index"
         :experiment="d"
-        :metric="selectedMetric.metric"/>
+        :metric="selectedMetric.metric"
+        v-on="$listeners"
+      />
     </div>
     <div class="three">
       <h3>streamperframe</h3>
@@ -31,7 +35,9 @@
         v-for="(s, index) in streamPerFrame"
         :key="index"
         :experiment="s"
-        :metric="selectedMetric.metric"/>
+        :metric="selectedMetric.metric"
+        v-on="$listeners"
+      />
     </div>
   </div>
 </template>
