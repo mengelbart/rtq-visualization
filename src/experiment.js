@@ -1,4 +1,6 @@
 class Experiment {
+  id = '';
+
   handler = '';
 
   file = '';
@@ -15,7 +17,7 @@ class Experiment {
 
   data = {};
 
-  constructor({
+  constructor(id, {
     handler,
     filename,
     bandwidth,
@@ -29,6 +31,7 @@ class Experiment {
     iperf,
     data,
   }) {
+    this.id = id;
     this.handler = handler;
     this.file = filename;
     this.bandwidth = bandwidth;

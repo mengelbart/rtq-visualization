@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import ExperimentDetail from '@/components/ExperimentDetail.vue';
+import ExperimentFilter from '@/components/ExperimentFilter.vue';
 import Home from '../views/Home.vue';
 
 Vue.use(VueRouter);
@@ -7,8 +9,18 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'Home',
     component: Home,
+    children: [
+      {
+        path: '',
+        component: ExperimentFilter,
+      },
+      {
+        path: ':id',
+        component: ExperimentDetail,
+        props: true,
+      },
+    ],
   },
   {
     path: '/about',
