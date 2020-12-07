@@ -43,7 +43,7 @@ export default {
           // minValue: -1,
           // maxValue: 1,
         },
-        title: `${this.experiment.file} ${this.experiment.bandwidth / 1000} kbps, cc: ${this.experiment.congestionControl} ${this.experiment.congestionControl !== 'none' ? this.experiment.feedbackFrequency : ''} ${this.experiment.congestionControl !== 'none' ? 'ms' : ''}`,
+        title: this.experiment.title(),
       };
     },
   },
