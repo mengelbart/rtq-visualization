@@ -1,93 +1,93 @@
 <template>
   <div class="main">
-    <div class="filter">
-      <fieldset id="files">
-        <div
-          v-for="(f, i) in files"
-          :key="i">
-          <input
-            type="checkbox"
-            :id="'f'+i"
-            :value="f"
-            v-model="selectedFiles">
-          <label :for="'f'+i">{{ f }}</label>
-        </div>
-      </fieldset>
-      <fieldset>
-        <div
-          v-for="(h, i) in handlers"
-          :key="i">
-          <input
-            type="checkbox"
-            :id="'h'+i"
-            :value="h"
-            v-model="selectedHandlers">
-          <label :for="'h'+i">{{ h }}</label>
-        </div>
-      </fieldset>
-      <fieldset>
-        <div
-          v-for="(b, i) in bandwidths"
-          :key="i">
-          <input
-            type="checkbox"
-            :id="'b'+i"
-            :value="b"
-            v-model="selectedBandwidths">
-          <label :for="'b'+i">{{ b === 0 ? 'no limit' : `${b / 1000} kbps` }}</label>
-        </div>
-      </fieldset>
-      <fieldset>
-        <div
-          v-for="(c, i) in congestionControls"
-          :key="i">
-          <input
-            type="checkbox"
-            :id="'c'+i"
-            :value="c"
-            v-model="selectedCongestionControls">
-          <label :for="'c'+i">{{ c }}</label>
-        </div>
-      </fieldset>
-      <fieldset>
-        <div
-          v-for="(f, i) in feedbackFrequencies"
-          :key="i">
-          <input
-            type="checkbox"
-            :id="'ff'+i"
-            :value="f"
-            v-model="selectedFeedbackFrequencies">
-          <label :for="'ff'+i">{{ f === 0 ? '' : `${f / 1000000}ms` }}</label>
-        </div>
-      </fieldset>
-      <fieldset>
-        <div
-          v-for="(r, i) in requestKeyframes"
-          :key="i">
-          <input
-            type="checkbox"
-            :id="'r'+i"
-            :value="r"
-            v-model="selectedRequestKeyframes">
-          <label :for="'r'+i">{{ r ? 'keyframe requests' : 'no keyframe requests' }}</label>
-        </div>
-      </fieldset>
-      <fieldset>
-        <div
-          v-for="(ip, i) in iperf"
-          :key="ip">
-          <input
-            type="checkbox"
-            :id="'ip'+i"
-            :value="ip"
-            v-model="selectedIperf">
-          <label :for="'ip'+i">
-            {{ ip ? 'additional iperf stream' : 'no additional iperf stream' }}
-          </label>
-        </div>
-      </fieldset>
-      {{ selectedExperiments.length }}
+    <fieldset class="filter">
+      <div
+        v-for="(f, i) in files"
+        :key="i">
+        <input
+          type="checkbox"
+          :id="'f'+i"
+          :value="f"
+          v-model="selectedFiles">
+        <label :for="'f'+i">{{ f }}</label>
+      </div>
+    </fieldset>
+    <fieldset class="filter">
+      <div
+        v-for="(h, i) in handlers"
+        :key="i">
+        <input
+          type="checkbox"
+          :id="'h'+i"
+          :value="h"
+          v-model="selectedHandlers">
+        <label :for="'h'+i">{{ h }}</label>
+      </div>
+    </fieldset>
+    <fieldset class="filter">
+      <div
+        v-for="(b, i) in bandwidths"
+        :key="i">
+        <input
+          type="checkbox"
+          :id="'b'+i"
+          :value="b"
+          v-model="selectedBandwidths">
+        <label :for="'b'+i">{{ b === 0 ? 'no limit' : `${b / 1000} kbps` }}</label>
+      </div>
+    </fieldset>
+    <fieldset class="filter">
+      <div
+        v-for="(c, i) in congestionControls"
+        :key="i">
+        <input
+          type="checkbox"
+          :id="'c'+i"
+          :value="c"
+          v-model="selectedCongestionControls">
+        <label :for="'c'+i">{{ c }}</label>
+      </div>
+    </fieldset>
+    <fieldset class="filter">
+      <div
+        v-for="(f, i) in feedbackFrequencies"
+        :key="i">
+        <input
+          type="checkbox"
+          :id="'ff'+i"
+          :value="f"
+          v-model="selectedFeedbackFrequencies">
+        <label :for="'ff'+i">{{ f === 0 ? '' : `${f / 1000000}ms` }}</label>
+      </div>
+    </fieldset>
+    <fieldset class="filter">
+      <div
+        v-for="(r, i) in requestKeyframes"
+        :key="i">
+        <input
+          type="checkbox"
+          :id="'r'+i"
+          :value="r"
+          v-model="selectedRequestKeyframes">
+        <label :for="'r'+i">{{ r ? 'keyframe requests' : 'no keyframe requests' }}</label>
+      </div>
+    </fieldset>
+    <fieldset class="filter">
+      <div
+        v-for="(ip, i) in iperf"
+        :key="ip">
+        <input
+          type="checkbox"
+          :id="'ip'+i"
+          :value="ip"
+          v-model="selectedIperf">
+        <label :for="'ip'+i">
+          {{ ip ? 'additional iperf stream' : 'no additional iperf stream' }}
+        </label>
+      </div>
+    </fieldset>
+    <div class="total">
+      selected: {{ selectedExperiments.length }}
     </div>
     <ExperimentOverview class="content" :experiments="selectedExperiments" @click="details"/>
   </div>
@@ -199,8 +199,7 @@ export default {
   grid-template-columns: repeat(12, [col-start] 1fr);
 }
 .filter {
-  grid-column-start: 1;
-  grid-column-end: span 12;
+  grid-column: span 3;
 }
 .content {
   grid-column-start: 1;

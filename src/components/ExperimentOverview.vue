@@ -43,30 +43,30 @@
 </template>
 
 <script>
-import LineChart from '@/components/LineChart.vue';
 import CumulativeChart from '@/components/CumulativeChart.vue';
+import LineChartContainer from '@/components/LineChartContainer.vue';
 
 export default {
   name: 'ExperimentOverview',
-  components: { LineChart, CumulativeChart },
+  components: { CumulativeChart, LineChartContainer },
   props: {
     experiments: Array,
   },
   data() {
     return {
       metrics: [
-        { text: 'SSIM', metric: 'SSIM', component: 'LineChart' },
+        { text: 'SSIM', metric: 'SSIM', component: 'LineChartContainer' },
         { text: 'SSIM CDF', metric: 'SSIM', component: 'CumulativeChart' },
-        { text: 'PSNR', metric: 'PSNR', component: 'LineChart' },
+        { text: 'PSNR', metric: 'PSNR', component: 'LineChartContainer' },
         { text: 'PSNR CDF', metric: 'PSNR', component: 'CumulativeChart' },
-        { text: 'scream-bitrate', metric: 'scream-bitrate', component: 'LineChart' },
-        { text: 'scream-congestion', metric: 'scream-congestion', component: 'LineChart' },
-        { text: 'scream-queue-length', metric: 'scream-queue-length', component: 'LineChart' },
+        { text: 'scream-bitrate', metric: 'scream-bitrate', component: 'LineChartContainer' },
+        { text: 'scream-congestion', metric: 'scream-congestion', component: 'LineChartContainer' },
+        { text: 'scream-queue-length', metric: 'scream-queue-length', component: 'LineChartContainer' },
       ],
       selectedMetric: {
         text: 'SSIM',
         metric: 'SSIM',
-        component: 'LineChart',
+        component: 'LineChartContainer',
       },
     };
   },
@@ -95,6 +95,11 @@ export default {
     streamPerFrame() {
       return this.experiments.filter((e) => e.handler === 'streamperframe'
         && this.metricFilter(e, this.selectedMetric.metric)).sort(this.expSort);
+    },
+  },
+  watch: {
+    metric() {
+      console.log(this.metric);
     },
   },
 };

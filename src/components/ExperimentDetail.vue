@@ -4,19 +4,19 @@
       <div class="meta">
         <pre>{{this.experiment | pretty}}</pre>
       </div>
-      <LineChart class="ssim" :experiment="this.experiment" metric="SSIM"/>
+      <LineChartContainer class="ssim" :experiment="this.experiment" metric="SSIM"/>
       <CumulativeChart class="ssim-cdf" :experiment="this.experiment" metric="SSIM"/>
-      <LineChart class="psnr" :experiment="this.experiment" metric="PSNR"/>
+      <LineChartContainer class="psnr" :experiment="this.experiment" metric="PSNR"/>
       <CumulativeChart class="psnr-cdf" :experiment="this.experiment" metric="PSNR"/>
-      <LineChart class="scream-congestion"
+      <LineChartContainer class="scream-congestion"
                  v-if="this.experiment.congestionControl === 'scream'"
                  :experiment="this.experiment"
                  metric="scream-congestion"/>
-      <LineChart class="scream-bitrate"
+      <LineChartContainer class="scream-bitrate"
                  v-if="this.experiment.congestionControl === 'scream'"
                  :experiment="this.experiment"
                  metric="scream-bitrate"/>
-      <LineChart class="scream-queue-length"
+      <LineChartContainer class="scream-queue-length"
                  v-if="this.experiment.congestionControl === 'scream'"
                  :experiment="this.experiment"
                  metric="scream-queue-length"/>
@@ -26,14 +26,14 @@
 </template>
 
 <script>
-import LineChart from '@/components/LineChart.vue';
+import LineChartContainer from '@/components/LineChartContainer.vue';
 import Experiment from '@/experiment';
 import firestore from '@/db';
 import CumulativeChart from '@/components/CumulativeChart.vue';
 
 export default {
   name: 'ExperimentDetail',
-  components: { CumulativeChart, LineChart },
+  components: { LineChartContainer, CumulativeChart },
   props: {
     id: String,
   },
