@@ -47,7 +47,14 @@ class Experiment {
   }
 
   title() {
-    return `${this.file}, ${this.bandwidthString()}, ${this.congestionControlString()}, ${this.iperf ? 'second stream: iperf' : 'no second stream'}`;
+    const title = [
+      `${this.file}, ${this.bandwidthString()}`,
+      this.congestionControlString(),
+    ];
+    if (this.iperf) {
+      title.push('second stream: iperf');
+    }
+    return title;
   }
 
   bandwidthString() {
