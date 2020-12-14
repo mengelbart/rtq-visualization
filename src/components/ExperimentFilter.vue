@@ -1,6 +1,7 @@
 <template>
   <div class="main">
     <fieldset class="filter">
+      <legend>Video Files</legend>
       <div
         v-for="(f, i) in files"
         :key="i">
@@ -13,6 +14,7 @@
       </div>
     </fieldset>
     <fieldset class="filter">
+      <legend>Transport</legend>
       <div
         v-for="(h, i) in handlers"
         :key="i">
@@ -25,6 +27,7 @@
       </div>
     </fieldset>
     <fieldset class="filter">
+      <legend>Bandwidth Limit</legend>
       <div
         v-for="(b, i) in bandwidths"
         :key="i">
@@ -37,6 +40,7 @@
       </div>
     </fieldset>
     <fieldset class="filter">
+      <legend>Congestion Control</legend>
       <div
         v-for="(c, i) in congestionControls"
         :key="i">
@@ -49,6 +53,7 @@
       </div>
     </fieldset>
     <fieldset class="filter">
+      <legend>Scream Feedback Frequency</legend>
       <div
         v-for="(f, i) in feedbackFrequencies"
         :key="i">
@@ -61,6 +66,7 @@
       </div>
     </fieldset>
     <fieldset class="filter">
+      <legend>Additional Keyframes (SCReAM)</legend>
       <div
         v-for="(r, i) in requestKeyframes"
         :key="i">
@@ -73,6 +79,7 @@
       </div>
     </fieldset>
     <fieldset class="filter">
+      <legend>Parallel stream 15s-30s</legend>
       <div
         v-for="(ip, i) in iperf"
         :key="ip">
