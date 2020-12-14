@@ -62,6 +62,7 @@ export default {
         { text: 'scream-bitrate', metric: 'scream-bitrate', component: 'LineChartContainer' },
         { text: 'scream-congestion', metric: 'scream-congestion', component: 'LineChartContainer' },
         { text: 'scream-queue-length', metric: 'scream-queue-length', component: 'LineChartContainer' },
+        { text: 'rtcp-overhead', metric: 'rtcp-overhead', component: 'LineChartContainer' },
       ],
       selectedMetric: {
         text: 'SSIM',
