@@ -8,18 +8,41 @@
       <CumulativeChart class="ssim-cdf" :experiment="this.experiment" metric="SSIM"/>
       <LineChartContainer class="psnr" :experiment="this.experiment" metric="PSNR"/>
       <CumulativeChart class="psnr-cdf" :experiment="this.experiment" metric="PSNR"/>
-      <LineChartContainer class="scream-congestion"
-                 v-if="this.experiment.congestionControl === 'scream'"
-                 :experiment="this.experiment"
-                 metric="scream-congestion"/>
-      <LineChartContainer class="scream-bitrate"
-                 v-if="this.experiment.congestionControl === 'scream'"
-                 :experiment="this.experiment"
-                 metric="scream-bitrate"/>
-      <LineChartContainer class="scream-queue-length"
-                 v-if="this.experiment.congestionControl === 'scream'"
-                 :experiment="this.experiment"
-                 metric="scream-queue-length"/>
+      <LineChartContainer
+        class="qlog-server-packet-sent"
+        v-if="['udp', 'streamperframe'].includes(this.experiment.handler)"
+        :experiment="this.experiment"
+        metric="server_packet_sent" />
+      <LineChartContainer
+        class="qlog-client-packet-received"
+        v-if="['udp', 'streamperframe'].includes(this.experiment.handler)"
+        :experiment="this.experiment"
+        metric="client_packet_received" />
+      <LineChartContainer
+        class="qlog-client-packet-sent"
+        v-if="['udp', 'streamperframe'].includes(this.experiment.handler)"
+        :experiment="this.experiment"
+        metric="client_packet_sent" />
+      <LineChartContainer
+        class="qlog-server-packet-received"
+        v-if="['udp', 'streamperframe'].includes(this.experiment.handler)"
+        :experiment="this.experiment"
+        metric="server_packet_received" />
+      <LineChartContainer
+        class="scream-bitrate"
+        v-if="this.experiment.congestionControl === 'scream'"
+        :experiment="this.experiment"
+        metric="scream-bitrate"/>
+      <LineChartContainer
+        class="scream-congestion"
+        v-if="this.experiment.congestionControl === 'scream'"
+        :experiment="this.experiment"
+        metric="scream-congestion"/>
+      <LineChartContainer
+        class="scream-queue-length"
+        v-if="this.experiment.congestionControl === 'scream'"
+        :experiment="this.experiment"
+        metric="scream-queue-length"/>
     </div>
     <div v-else>Experiment not found</div>
   </div>
@@ -91,15 +114,32 @@ export default {
   grid-column: 2;
 }
 .scream-congestion {
-  grid-row: 4;
+  grid-row: 6;
   grid-column: 1;
 }
 .scream-bitrate {
-  grid-row: 4;
+  grid-row: 6;
   grid-column: 2;
 }
 .scream-queue-length {
-  grid-row: 5;
+  grid-row: 7;
   grid-column: span 2;
+}
+
+.qlog-server-packet-sent {
+  grid-row: 4;
+  grid-column: 1;
+}
+.qlog-client-packet-received {
+  grid-row: 4;
+  grid-column: 2;
+}
+.qlog-client-packet-sent {
+  grid-row: 5;
+  grid-column: 2;
+}
+.qlog-server-packet-received {
+  grid-row: 5;
+  grid-column: 1;
 }
 </style>

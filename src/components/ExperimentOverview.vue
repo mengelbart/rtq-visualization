@@ -63,6 +63,10 @@ export default {
         { text: 'scream-congestion', metric: 'scream-congestion', component: 'LineChartContainer' },
         { text: 'scream-queue-length', metric: 'scream-queue-length', component: 'LineChartContainer' },
         { text: 'rtcp-overhead', metric: 'rtcp-overhead', component: 'LineChartContainer' },
+        { text: 'quic_server_packet_sent', metric: 'server_packet_sent', component: 'LineChartContainer' },
+        { text: 'quic_server_packet_received', metric: 'server_packet_received', component: 'LineChartContainer' },
+        { text: 'quic_client_packet_sent', metric: 'client_packet_sent', component: 'LineChartContainer' },
+        { text: 'quic_client_packet_received', metric: 'client_packet_received', component: 'LineChartContainer' },
       ],
       selectedMetric: {
         text: 'SSIM',
