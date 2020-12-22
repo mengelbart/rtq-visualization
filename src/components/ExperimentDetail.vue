@@ -10,22 +10,22 @@
       <CumulativeChart class="psnr-cdf" :experiment="this.experiment" metric="PSNR"/>
       <LineChartContainer
         class="qlog-server-packet-sent"
-        v-if="['udp', 'streamperframe'].includes(this.experiment.handler)"
+        v-if="['datagram', 'streamperframe'].includes(this.experiment.handler)"
         :experiment="this.experiment"
         metric="server_packet_sent" />
       <LineChartContainer
         class="qlog-client-packet-received"
-        v-if="['udp', 'streamperframe'].includes(this.experiment.handler)"
+        v-if="['datagram', 'streamperframe'].includes(this.experiment.handler)"
         :experiment="this.experiment"
         metric="client_packet_received" />
       <LineChartContainer
         class="qlog-client-packet-sent"
-        v-if="['udp', 'streamperframe'].includes(this.experiment.handler)"
+        v-if="['datagram', 'streamperframe'].includes(this.experiment.handler)"
         :experiment="this.experiment"
         metric="client_packet_sent" />
       <LineChartContainer
         class="qlog-server-packet-received"
-        v-if="['udp', 'streamperframe'].includes(this.experiment.handler)"
+        v-if="['datagram', 'streamperframe'].includes(this.experiment.handler)"
         :experiment="this.experiment"
         metric="server_packet_received" />
       <LineChartContainer
