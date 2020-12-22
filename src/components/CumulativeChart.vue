@@ -45,7 +45,7 @@ export default {
   }),
   methods: {
     click() {
-      this.$emit('click', this.experiment.id);
+      this.$emit('click', this.experiment.firebaseID);
     },
     arrayShareBelowPivot(a, pivot) {
       return a.filter((x) => (x <= pivot)).length / a.length;

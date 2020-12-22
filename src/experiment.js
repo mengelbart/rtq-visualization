@@ -1,4 +1,6 @@
 class Experiment {
+  firebaseID = '';
+
   id = '';
 
   handler = '';
@@ -17,7 +19,8 @@ class Experiment {
 
   data = {};
 
-  constructor(id, {
+  constructor(firebaseID, {
+    ID,
     handler,
     filename,
     bandwidth,
@@ -31,7 +34,8 @@ class Experiment {
     iperf,
     data,
   }) {
-    this.id = id;
+    this.firebaseID = firebaseID;
+    this.id = ID;
     this.handler = handler;
     this.file = filename;
     this.bandwidth = bandwidth;

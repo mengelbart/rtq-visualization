@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     click() {
-      this.$emit('click', this.experiment.id);
+      this.$emit('click', this.experiment.firebaseID);
     },
     async update() {
       this.loaded = false;
