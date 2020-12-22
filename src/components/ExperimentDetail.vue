@@ -39,6 +39,12 @@
         :experiment="this.experiment"
         metric="scream-congestion"/>
       <LineChartContainer
+        class="rtcp-overhead"
+        v-if="this.experiment.congestionControl === 'scream'"
+        :experiment="this.experiment"
+        metric="rtcp-overhead"
+        />
+      <LineChartContainer
         class="scream-queue-length"
         v-if="this.experiment.congestionControl === 'scream'"
         :experiment="this.experiment"
@@ -123,9 +129,12 @@ export default {
 }
 .scream-queue-length {
   grid-row: 7;
-  grid-column: span 2;
+  grid-column: 1;
 }
-
+.rtcp-overhead {
+  grid-row: 7;
+  grid-column: 2;
+}
 .qlog-server-packet-sent {
   grid-row: 4;
   grid-column: 1;
