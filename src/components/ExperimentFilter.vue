@@ -193,8 +193,8 @@ export default {
   },
   methods: {
     details(id) {
-      console.log('click: ', id);
-      this.$router.push(`/${id}`);
+      const routeData = this.$router.resolve(`/${id}`);
+      window.open(routeData.href, '_blank');
     },
   },
 };
