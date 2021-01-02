@@ -1,102 +1,110 @@
 <template>
-  <div class="main">
-    <fieldset class="filter">
-      <legend>Video Files</legend>
-      <div
-        v-for="(f, i) in files"
-        :key="i">
-        <input
-          type="checkbox"
-          :id="'f'+i"
-          :value="f"
-          v-model="selectedFiles">
-        <label :for="'f'+i">{{ f }}</label>
+  <div>
+    <select class="option" v-model="selectedCommit">
+      <option disabled value=""></option>
+      <option v-for="commit in commits" :value="commit" :key="commit">
+        {{ commit }}
+      </option>
+    </select>
+    <div class="main">
+      <fieldset class="filter">
+        <legend>Video Files</legend>
+        <div
+          v-for="(f, i) in files"
+          :key="i">
+          <input
+            type="checkbox"
+            :id="'f'+i"
+            :value="f"
+            v-model="selectedFiles">
+          <label :for="'f'+i">{{ f }}</label>
+        </div>
+      </fieldset>
+      <fieldset class="filter">
+        <legend>Transport</legend>
+        <div
+          v-for="(h, i) in handlers"
+          :key="i">
+          <input
+            type="checkbox"
+            :id="'h'+i"
+            :value="h"
+            v-model="selectedHandlers">
+          <label :for="'h'+i">{{ h }}</label>
+        </div>
+      </fieldset>
+      <fieldset class="filter">
+        <legend>Bandwidth Limit</legend>
+        <div
+          v-for="(b, i) in bandwidths"
+          :key="i">
+          <input
+            type="checkbox"
+            :id="'b'+i"
+            :value="b"
+            v-model="selectedBandwidths">
+          <label :for="'b'+i">{{ b === 0 ? 'no limit' : `${b / 1000} kbps` }}</label>
+        </div>
+      </fieldset>
+      <fieldset class="filter">
+        <legend>Congestion Control</legend>
+        <div
+          v-for="(c, i) in congestionControls"
+          :key="i">
+          <input
+            type="checkbox"
+            :id="'c'+i"
+            :value="c"
+            v-model="selectedCongestionControls">
+          <label :for="'c'+i">{{ c }}</label>
+        </div>
+      </fieldset>
+      <fieldset class="filter">
+        <legend>Scream Feedback Frequency</legend>
+        <div
+          v-for="(f, i) in feedbackFrequencies"
+          :key="i">
+          <input
+            type="checkbox"
+            :id="'ff'+i"
+            :value="f"
+            v-model="selectedFeedbackFrequencies">
+          <label :for="'ff'+i">{{ f === 0 ? '' : `${f / 1000000}ms` }}</label>
+        </div>
+      </fieldset>
+      <fieldset class="filter">
+        <legend>Additional Keyframes (SCReAM)</legend>
+        <div
+          v-for="(r, i) in requestKeyframes"
+          :key="i">
+          <input
+            type="checkbox"
+            :id="'r'+i"
+            :value="r"
+            v-model="selectedRequestKeyframes">
+          <label :for="'r'+i">{{ r ? 'keyframe requests' : 'no keyframe requests' }}</label>
+        </div>
+      </fieldset>
+      <fieldset class="filter">
+        <legend>Parallel stream 15s-30s</legend>
+        <div
+          v-for="(ip, i) in iperf"
+          :key="ip">
+          <input
+            type="checkbox"
+            :id="'ip'+i"
+            :value="ip"
+            v-model="selectedIperf">
+          <label :for="'ip'+i">
+            {{ ip ? 'additional iperf stream' : 'no additional iperf stream' }}
+          </label>
+        </div>
+      </fieldset>
+      <div class="total">
+        selected: {{ selectedExperiments.length }}
       </div>
-    </fieldset>
-    <fieldset class="filter">
-      <legend>Transport</legend>
-      <div
-        v-for="(h, i) in handlers"
-        :key="i">
-        <input
-          type="checkbox"
-          :id="'h'+i"
-          :value="h"
-          v-model="selectedHandlers">
-        <label :for="'h'+i">{{ h }}</label>
-      </div>
-    </fieldset>
-    <fieldset class="filter">
-      <legend>Bandwidth Limit</legend>
-      <div
-        v-for="(b, i) in bandwidths"
-        :key="i">
-        <input
-          type="checkbox"
-          :id="'b'+i"
-          :value="b"
-          v-model="selectedBandwidths">
-        <label :for="'b'+i">{{ b === 0 ? 'no limit' : `${b / 1000} kbps` }}</label>
-      </div>
-    </fieldset>
-    <fieldset class="filter">
-      <legend>Congestion Control</legend>
-      <div
-        v-for="(c, i) in congestionControls"
-        :key="i">
-        <input
-          type="checkbox"
-          :id="'c'+i"
-          :value="c"
-          v-model="selectedCongestionControls">
-        <label :for="'c'+i">{{ c }}</label>
-      </div>
-    </fieldset>
-    <fieldset class="filter">
-      <legend>Scream Feedback Frequency</legend>
-      <div
-        v-for="(f, i) in feedbackFrequencies"
-        :key="i">
-        <input
-          type="checkbox"
-          :id="'ff'+i"
-          :value="f"
-          v-model="selectedFeedbackFrequencies">
-        <label :for="'ff'+i">{{ f === 0 ? '' : `${f / 1000000}ms` }}</label>
-      </div>
-    </fieldset>
-    <fieldset class="filter">
-      <legend>Additional Keyframes (SCReAM)</legend>
-      <div
-        v-for="(r, i) in requestKeyframes"
-        :key="i">
-        <input
-          type="checkbox"
-          :id="'r'+i"
-          :value="r"
-          v-model="selectedRequestKeyframes">
-        <label :for="'r'+i">{{ r ? 'keyframe requests' : 'no keyframe requests' }}</label>
-      </div>
-    </fieldset>
-    <fieldset class="filter">
-      <legend>Parallel stream 15s-30s</legend>
-      <div
-        v-for="(ip, i) in iperf"
-        :key="ip">
-        <input
-          type="checkbox"
-          :id="'ip'+i"
-          :value="ip"
-          v-model="selectedIperf">
-        <label :for="'ip'+i">
-          {{ ip ? 'additional iperf stream' : 'no additional iperf stream' }}
-        </label>
-      </div>
-    </fieldset>
-    <div class="total">
-      selected: {{ selectedExperiments.length }}
+      <ExperimentOverview class="content" :experiments="selectedExperiments" @click="details"/>
     </div>
-    <ExperimentOverview class="content" :experiments="selectedExperiments" @click="details"/>
   </div>
 </template>
 
@@ -118,6 +126,9 @@ export default {
       selectedRequestKeyframes: [],
       selectedIperf: [],
       experiments: [],
+
+      commits: [],
+      selectedCommit: null,
     };
   },
   computed: {
@@ -169,6 +180,19 @@ export default {
     },
   },
   watch: {
+    selectedCommit() {
+      firestore.then((db) => {
+        db.collection(`experiments/${this.selectedCommit}/runs`)
+          .get()
+          .then((querySnapshot) => {
+            this.experiments = querySnapshot.docs.map((doc) => {
+              const d = doc.data();
+              // console.log(d);
+              return new Experiment(doc.id, d);
+            });
+          });
+      });
+    },
     experiments() {
       this.selectedHandlers = this.handlers;
       this.selectedFiles.push(this.files[0]);
@@ -181,12 +205,12 @@ export default {
   },
   async mounted() {
     firestore.then((db) => {
-      db.collection('experiments')
+      db.collection('experiments/')
         .get()
-        .then((querySnapshot) => {
-          this.experiments = querySnapshot.docs.map((doc) => {
-            const d = doc.data();
-            return new Experiment(doc.id, d);
+        .then((qs) => {
+          this.commits = qs.docs.map((d) => {
+            const { Commit } = d.data();
+            return Commit;
           });
         });
     });
