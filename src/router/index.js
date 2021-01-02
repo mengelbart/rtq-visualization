@@ -16,7 +16,7 @@ const routes = [
         component: ExperimentFilter,
       },
       {
-        path: ':id',
+        path: ':commit/:id',
         component: ExperimentDetail,
         props: true,
       },

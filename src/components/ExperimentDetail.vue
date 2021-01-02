@@ -65,6 +65,7 @@ export default {
   components: { LineChartContainer, CumulativeChart },
   props: {
     id: String,
+    commit: String,
   },
   data() {
     return {
@@ -74,7 +75,7 @@ export default {
   },
   async mounted() {
     firestore.then((db) => {
-      db.collection('experiments')
+      db.collection(`experiments/${this.commit}/runs`)
         .doc(this.id)
         .get()
         .then((doc) => {

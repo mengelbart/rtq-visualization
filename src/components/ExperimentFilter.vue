@@ -217,7 +217,7 @@ export default {
   },
   methods: {
     details(id) {
-      const routeData = this.$router.resolve(`/${id}`);
+      const routeData = this.$router.resolve(`/${this.selectedCommit}/${id}`);
       window.open(routeData.href, '_blank');
     },
   },
