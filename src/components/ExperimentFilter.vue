@@ -86,7 +86,7 @@
         </div>
       </fieldset>
       <fieldset class="filter">
-        <legend>Parallel stream 15s-30s</legend>
+        <legend>Parallel stream 60s-120s</legend>
         <div
           v-for="(ip, i) in iperf"
           :key="ip">
