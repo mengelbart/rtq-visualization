@@ -187,19 +187,25 @@ export default {
           .then((querySnapshot) => {
             this.experiments = querySnapshot.docs.map((doc) => {
               const d = doc.data();
-              // console.log(d);
               return new Experiment(doc.id, d);
             });
           });
       });
     },
     experiments() {
+      this.selectedHandlers = [];
       this.selectedHandlers = this.handlers;
+      this.selectedFiles = [];
       this.selectedFiles.push(this.files[0]);
+      this.selectedBandwidths = [];
       this.selectedBandwidths.push(this.bandwidths[0]);
+      this.selectedCongestionControls = [];
       this.selectedCongestionControls.push(this.congestionControls[0]);
+      this.selectedFeedbackFrequencies = [];
       this.selectedFeedbackFrequencies.push(this.feedbackFrequencies[0]);
+      this.selectedRequestKeyframes = [];
       this.selectedRequestKeyframes.push(false);
+      this.selectedIperf = [];
       this.selectedIperf.push(false);
     },
   },
