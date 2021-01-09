@@ -8,6 +8,10 @@
       <CumulativeChart class="ssim-cdf" :experiment="this.experiment" metric="SSIM"/>
       <LineChartContainer class="psnr" :experiment="this.experiment" metric="PSNR"/>
       <CumulativeChart class="psnr-cdf" :experiment="this.experiment" metric="PSNR"/>
+      <LineChartContainer class="client-tx" :experiment="this.experiment" metric="client_tx_bytes"/>
+      <LineChartContainer class="server-tx" :experiment="this.experiment" metric="server_tx_bytes"/>
+      <LineChartContainer class="client-rx" :experiment="this.experiment" metric="client_rx_bytes"/>
+      <LineChartContainer class="server-rx" :experiment="this.experiment" metric="server_rx_bytes"/>
       <LineChartContainer
         class="qlog-server-packet-sent"
         v-if="['datagram', 'streamperframe'].includes(this.experiment.handler)"
@@ -120,36 +124,52 @@ export default {
   grid-row: 3;
   grid-column: 2;
 }
-.scream-congestion {
-  grid-row: 6;
-  grid-column: 1;
-}
-.scream-bitrate {
-  grid-row: 6;
+.client-tx {
+  grid-row: 5;
   grid-column: 2;
 }
-.scream-queue-length {
-  grid-row: 7;
+.server-tx {
+  grid-row: 4;
   grid-column: 1;
 }
-.rtcp-overhead {
-  grid-row: 7;
+.client-rx {
+  grid-row: 4;
   grid-column: 2;
+}
+.server-rx {
+  grid-row: 5;
+  grid-column: 1;
 }
 .qlog-server-packet-sent {
-  grid-row: 4;
+  grid-row: 6;
   grid-column: 1;
 }
 .qlog-client-packet-received {
-  grid-row: 4;
+  grid-row: 6;
   grid-column: 2;
 }
 .qlog-client-packet-sent {
-  grid-row: 5;
+  grid-row: 7;
   grid-column: 2;
 }
 .qlog-server-packet-received {
-  grid-row: 5;
+  grid-row: 7;
   grid-column: 1;
+}
+.scream-congestion {
+  grid-row: 8;
+  grid-column: 1;
+}
+.scream-bitrate {
+  grid-row: 8;
+  grid-column: 2;
+}
+.scream-queue-length {
+  grid-row: 9;
+  grid-column: 1;
+}
+.rtcp-overhead {
+  grid-row: 9;
+  grid-column: 2;
 }
 </style>

@@ -67,6 +67,10 @@ export default {
         { text: 'quic_server_packet_received', metric: 'server_packet_received', component: 'LineChartContainer' },
         { text: 'quic_client_packet_sent', metric: 'client_packet_sent', component: 'LineChartContainer' },
         { text: 'quic_client_packet_received', metric: 'client_packet_received', component: 'LineChartContainer' },
+        { text: 'client_tx_bytes', metric: 'client_tx_bytes', component: 'LineChartContainer' },
+        { text: 'server_tx_bytes', metric: 'server_tx_bytes', component: 'LineChartContainer' },
+        { text: 'client_rx_bytes', metric: 'client_rx_bytes', component: 'LineChartContainer' },
+        { text: 'server_rx_bytes', metric: 'server_rx_bytes', component: 'LineChartContainer' },
       ],
       selectedMetric: {
         text: 'SSIM',
