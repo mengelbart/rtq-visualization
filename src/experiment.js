@@ -13,6 +13,8 @@ class Experiment {
 
   feedbackFrequency = 0;
 
+  feedbackAlgorithm = '';
+
   version = '';
 
   requestKeyframes = false;
@@ -28,6 +30,8 @@ class Experiment {
     congestion_control,
     // eslint-disable-next-line camelcase
     feedback_frequency,
+    // eslint-disable-next-line camelcase
+    feedback_algorithm,
     version,
     // eslint-disable-next-line camelcase
     request_key_frames,
@@ -43,6 +47,8 @@ class Experiment {
     this.congestionControl = congestion_control;
     // eslint-disable-next-line camelcase
     this.feedbackFrequency = feedback_frequency;
+    // eslint-disable-next-line camelcase
+    this.feedbackAlgorithm = feedback_algorithm;
     this.version = version;
     // eslint-disable-next-line camelcase
     this.requestKeyframes = request_key_frames;
@@ -72,7 +78,7 @@ class Experiment {
     if (this.congestionControl === 'none') {
       return 'no cc';
     }
-    return `${this.congestionControl}: ${this.feedbackFrequencyString()}, ${this.keyframeRequestString()}`;
+    return `${this.congestionControl}: ${this.feedbackFrequencyString()}, ${this.keyframeRequestString()}, feedback algo: ${this.feedbackAlgorithm}`;
   }
 
   feedbackFrequencyString() {

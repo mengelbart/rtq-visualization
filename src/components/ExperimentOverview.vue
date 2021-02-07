@@ -86,7 +86,8 @@ export default {
         || a.bandwidth - b.bandwidth
         || a.feedbackFrequency - b.feedbackFrequency
         || a.requestKeyframes - b.requestKeyframes
-        || a.iperf - b.iperf;
+        || a.iperf - b.iperf
+        || a.feedbackAlgorithm.localeCompare(b.feedbackAlgorithm);
     },
     metricFilter(exp, metric) {
       return exp.data[metric];
